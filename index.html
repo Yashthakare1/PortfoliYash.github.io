@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Thakare Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+
+
+        /* Default styling for all devices */
+            .name_header {
+              padding-left: 0;
+            }
+            
+        /* Styling for web/laptop interfaces */
+            @media (min-width: 768px) {
+              .name_header {
+                padding-left: 3em;
+              }
+            }
+
+        
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--hacker-background);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: var(--matrix-green);
+        }
+
+
+        .loader {
+            position: relative;
+            width: 108px;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 2em !important
+          }
+          .loader::after , .loader::before  {
+            content: '';
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            background-color: #FFF;
+            background-image:  radial-gradient(circle 14px, #0d161b 100%, transparent 0);
+            background-repeat: no-repeat;
+            border-radius: 50%;
+            animation: eyeMove 10s infinite , blink 10s infinite;
+          }
+          @keyframes eyeMove {
+            0%  , 10% {     background-position: 0px 0px}
+            13%  , 40% {     background-position: -15px 0px}
+            43%  , 70% {     background-position: 15px 0px}
+            73%  , 90% {     background-position: 0px 15px}
+            93%  , 100% {     background-position: 0px 0px}
+          }
+          @keyframes blink {
+            0%  , 10% , 12% , 20%, 22%, 40%, 42% , 60%, 62%,  70%, 72% , 90%, 92%, 98% , 100%
+            { height: 48px}
+            11% , 21% ,41% , 61% , 71% , 91% , 99%
+            { height: 18px}
+          }
+
+
+
+      /*  .loader {
+            border: 6px solid var(--cyber-blue);
+            border-top: 6px solid var(--matrix-green);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }*/
+
+         .welcome-message {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .enter-button {
+            background-color: var(--cyber-blue);
+            color: var(--deep-black);
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .enter-button:hover {
+            background-color: var(--matrix-green);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--matrix-green);
+        }
+
+        :root {
+            --matrix-green: #00ff41;
+            --cyber-blue: #00e5ff;
+            --deep-black: #0a0a0a;
+            --hacker-background: #121212;
+            --circuit-line: rgba(0, 229, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--hacker-background);
+            color: var(--matrix-green);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Matrix-like Background */
+        .matrix-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+            z-index: -2;
+        }
+
+        .matrix-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(0deg, transparent 0%, rgba(0, 255, 65, 0.05) 50%, transparent 100%),
+                linear-gradient(90deg, transparent 0%, rgba(0, 255, 65, 0.05) 50%, transparent 100%);
+            background-size: 30px 30px;
+            opacity: 0.1;
+            z-index: -1;
+            animation: matrix-scan 5s linear infinite;
+        }
+
+        @keyframes matrix-scan {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 30px 0, 30px 0; }
+        }
+
+        /* Cyber Circuit Animation */
+        .circuit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(var(--circuit-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--circuit-line) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Profile Section with Advanced Cyber Animation */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image-container {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid var(--cyber-blue);
+            object-fit: cover;
+            box-shadow: 
+                0 0 20px var(--cyber-blue),
+                0 0 40px rgba(0, 229, 255, 0.5),
+                inset 0 0 15px rgba(0, 229, 255, 0.3);
+            transition: all 0.6s ease;
+            transform-style: preserve-3d;
+            animation: cyber-pulse 3s infinite alternate;
+        }
+
+        @keyframes cyber-pulse {
+            0% { 
+                transform: scale(1) rotateY(0deg);
+                box-shadow: 
+                    0 0 20px var(--cyber-blue),
+                    0 0 40px rgba(0, 229, 255, 0.5);
+            }
+            100% { 
+                transform: scale(1.05) rotateY(15deg);
+                box-shadow: 
+                    0 0 30px var(--cyber-blue),
+                    0 0 60px rgba(0, 229, 255, 0.7);
+            }
+        }
+
+        .profile-image:hover {
+            transform: scale(1.1) rotateY(360deg);
+            filter: brightness(1.2) contrast(1.2);
+        }
+
+        /* Glitch Text Effect */
+        .glitch-text {
+            position: relative;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--matrix-green);
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 red;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 blue;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 44px, 0); }
+            25% { clip: rect(56px, 9999px, 91px, 0); }
+            50% { clip: rect(12px, 9999px, 59px, 0); }
+            75% { clip: rect(34px, 9999px, 70px, 0); }
+            100% { clip: rect(55px, 9999px, 34px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(30px, 9999px, 44px, 0); }
+            25% { clip: rect(10px, 9999px, 91px, 0); }
+            50% { clip: rect(50px, 9999px, 59px, 0); }
+            75% { clip: rect(34px, 9999px, 70px, 0); }
+            100% { clip: rect(55px, 9999px, 34px, 0); }
+        }
+
+        /* Cyber Section Styles */
+        .cyber-section {
+            background: rgba(18, 18, 18, 0.9);
+            border: 2px solid var(--cyber-blue);
+            border-radius: 10px;
+            margin: 2rem 0;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            color: var(--cyber-blue);
+            border-bottom: 2px solid var(--matrix-green);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Cyber Tools Grid */
+        .cyber-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .cyber-tool {
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid var(--cyber-blue);
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-tool::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(0, 229, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .cyber-tool:hover::before {
+            left: 100%;
+        }
+
+        .cyber-tool:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--cyber-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>    
+    <div id="loader-overlay">
+        <!-- <div class="loader"></div> -->
+        <span class="loader"></span>
+        <div class="welcome-message">
+            Welcome to the Yash Thakare Portfolio
+        </div>
+        <button id="enter-btn" class="enter-button">Enter Secure Zone</button>
+    </div>
+
+    <div class="matrix-background"></div>
+    <div class="matrix-overlay"></div>
+    <div class="circuit-overlay"></div>
+
+    <div class="container">
+        <section class="profile-section">
+            <div class="profile-image-container">
+                <img src="profile.jpg" alt="Cyber Security Professional" class="profile-image">
+            </div>
+            <div class="name_header">
+                <div class="glitch-text" data-text="Yash Thakare">
+                    Yash Thakare
+                </div>
+                <p style="text-align: center; color: var(--cyber-blue);">
+                    Cyber Security Executive | Certified Ethical Hacker | Digital Defender
+                </p>
+            </div>
+        </section>
+
+        <section class="cyber-section">
+            <h2 class="section-title">Proffesional Summary</h2>
+            <div>
+                <p><strong style="color: var(--cyber-blue);"></strong>A dedicated and certified Cybersecurity Analyst specializing in 
+        Vulnerability Assessment & Penetration Testing (VAPT), exploit development, and security automation. Experienced in 
+        identifying, analyzing, and mitigating security vulnerabilities across web applications, networks, and APIs.
+</p>
+            </div>
+        </section>
+
+        <section class="cyber-section">
+            <h2 class="section-title">Personal Cyber Profile</h2>
+            <div>
+                <p><strong style="color: var(--cyber-blue);">Name:</strong> Yash Thakare</p>
+                <p><strong style="color: var(--cyber-blue);">Email:</strong> yashthakareyt009@gmail.com</p>
+                
+                
+            </div>
+        </section>
+
+        <section class="cyber-section">
+            <h2 class="section-title">Proffesional Experience</h2>
+            <div>
+                <p><strong style="color: var(--cyber-blue);">Web Penetration Tester:</strong> MR WebSecure | March 2024 - June 2024</p>
+           	<ul>
+            <li>Conducted penetration testing and vulnerability assessments on web applications, APIs, and networks.</li>
+            <li>Developed custom exploits and scripts to automate security testing.</li>
+            <li>Performed manual and automated security testing, identifying weaknesses and implementing mitigation strategies.</li>
+            <li>Authored detailed penetration testing reports with remediation recommendations.</li>
+            </ul>
+        
+            </div>
+        </section>
+
+        <section class="cyber-section">
+            <h2 class="section-title">Education</h2>
+            <div>
+                <p><strong style="color: var(--cyber-blue);">Diploma in Computer Engineering:</strong> Trimurti Institute of Technology, Jalgaon (Currently Pursuing)</p>
+        <p><strong style="color: var(--cyber-blue);">Diploma in Information Security:</strong> MR WebSecure Institute, Andheri | 2023 – 2024</p>
+        <p><strong style="color: var(--cyber-blue);">Higher Secondary Education (12th Science):</strong> Nutan Maratha College, Jalgaon | 2020 – 2021</p>
+        
+            </div>
+        </section>
+
+        <section class="cyber-section">
+            <h2 class="section-title">Cyber Arsenal: Tools & Technologies</h2>
+            <div class="cyber-tools-grid">
+                <div class="cyber-tool">
+                    <i class="fas fa-shield-alt" style="color: var(--cyber-blue);"></i>
+                    <h3>Nessus</h3>
+                </div>
+                <div class="cyber-tool">
+                    <i class="fas fa-network-wired" style="color: var(--cyber-blue);"></i>
+                    <h3>Wireshark</h3>
+                </div>
+                <div class="cyber-tool">
+                    <i class="fas fa-code" style="color: var(--cyber-blue);"></i>
+                    <h3>Metasploit</h3>
+                </div>
+                <div class="cyber-tool">
+                    <i class="fas fa-virus" style="color: var(--cyber-blue);"></i>
+                    <h3>Burp Suite</h3>
+                </div>
+                <div class="cyber-tool">
+                    <i class="fas fa-server" style="color: var(--cyber-blue);"></i>
+                    <h3>Sqlmap</h3>
+                </div>
+                <div class="cyber-tool">
+                    <i class="fas fa-terminal" style="color: var(--cyber-blue);"></i>
+                    <h3>Nmap</h3>
+                </div>
+                
+            </div>
+        </section>
+
+        <section class="cyber-section">
+            <h2 class="section-title">Cyber Security Expertise</h2>
+            <div>
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; color: var(--cyber-blue);">
+                        <span>Vulnerability Assessment Penetration Testing</span>
+                        <span>98%</span>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.2); height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div style="width: 98%; height: 100%; background: linear-gradient(to right, var(--matrix-green), var(--cyber-blue));"></div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; color: var(--cyber-blue);">
+                        <span>Penetration Testing</span>
+                        <span>90%</span>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.2); height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div style="width: 90%; height: 100%; background: linear-gradient(to right, var(--matrix-green), var(--cyber-blue));"></div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; color: var(--cyber-blue);">
+                        <span>OSINT</span>
+                        <span>94%</span>
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.2); height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div
+                            style="width: 94%; height: 100%; background: linear-gradient(to right, var(--matrix-green), var(--cyber-blue));">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cyber-section">
+            <h2 class="section-title">Certifications</h2>
+            <div>
+        <p>🎖️ Certified Cybersecurity & Ethical Hacker</p>
+        <p>🎖️ Certified Web Penetration Tester</p>
+        <p>🎖️ Certified Network Security Specialist</p>
+        <p>🎖️ Certified Web Developer (Python & Django)</p>
+        <p>🎖️ Certified C Programmer</p>
+    </div>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; background: rgba(0,0,0,0.9); color: var(--cyber-blue);">
+        <p>© 2025 Yash Thakare | Cyber Security Executive</p>
+    </footer>
+   <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loaderOverlay = document.getElementById('loader-overlay');
+            const enterButton = document.getElementById('enter-btn');
+
+            // Optional: You can customize the loader behavior
+            enterButton.addEventListener('click', () => {
+                // You can add custom actions here
+                loaderOverlay.style.display = 'none';
+                
+                // If you want to trigger a custom event when entering
+                const event = new Event('cyber-loader-complete');
+                document.dispatchEvent(event);
+            });
+
+            // Optional: Auto-hide loader after some time
+            setTimeout(() => {
+                enterButton.textContent = 'Enter Secure Zone';
+            }, 3000);
+        });
+    </script> 
+
+</body>
+</html>
